@@ -13,3 +13,4 @@ class LoginPageLocators():
 
 class ProductPageLocators():
     ADD_TO_CART_LINK = (By.CSS_SELECTOR, ".btn-add-to-basket")
+    SUCCESS_MESSAGE  = (By.CSS_SELECTOR, ".alert.alert-safe.alert-noicon.alert-success strong")
