@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support import expected_conditions as EC
+from .locators import BasePageLocators
 import math
 
 class BasePage():
@@ -56,3 +57,14 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+    
+    def go_to_login_page(self):
+        #login_link = self.browser.find_element(By.CSS_SELECTOR, "#registration_link")
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+        # return LoginPage(browser=self.browser, url=self.browser.current_url)
+    
+    def should_be_login_link(self):
+        #self.browser.find_element(By.CSS_SELECTOR, "#login_link_invalid")
+        #assert self.is_element_present(By.CSS_SELECTOR, "#registration_link"), "Login link is not presented"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
