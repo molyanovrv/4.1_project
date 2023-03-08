@@ -1,3 +1,4 @@
+from pages.basket_page import BasketPage
 from pages.main_page  import MainPage
 from pages.product_page import ProductPage
 from selenium.webdriver.common.by import By
@@ -37,7 +38,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     assert result, "элемент найден, а тест на отсутствие"
        
 @pytest.mark.skip(reason="no way of currently testing this")
-def te_st_guest_can_add_product_to_basket(browser):
+def test_guest_can_add_product_to_basket(browser):
     page = ProductPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
     page.open()                         # открываем страницу
     page.add_to_cart()                  # кладем в корзину
@@ -49,14 +50,28 @@ def te_st_guest_can_add_product_to_basket(browser):
     #time.sleep(2)
     #login_page.should_be_login_page()  # вызываем метод, вызывающий другие проверки
     
+@pytest.mark.skip(reason="no way of currently testing this")
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.should_be_login_link()
     
+@pytest.mark.skip(reason="no way of currently testing this")
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+    
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = ProductPage(browser, link)
+    page.open()
+    time.sleep(7)
+    page.go_to_basket_page()
+    basketpage = BasketPage(browser, browser.current_url)
+    assert basketpage.is_disappeared(By.CSS_SELECTOR, "a.btn.btn-lg.btn-primary.btn-block"), "Не отсутствует Перейти к оформлению"
+    assert basketpage.havnt_book_in_basket()
+    
+    

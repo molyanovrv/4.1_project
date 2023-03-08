@@ -21,6 +21,15 @@ class BasePage():
         except NoSuchElementException:
             return False
         return True    
+
+    def is_element_with_text_present(self, how, what, text):
+        try:
+            elText = self.browser.find_element(how, what).text
+            
+        except NoSuchElementException:
+            return False
+        print("\n\n--  " + elText + "  -- is_element_with_text_present\n\n")
+        return elText == text #True    
         
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -45,10 +54,6 @@ class BasePage():
         print("toot")
         return False
     
-    # элемент должен исчезнуть
-    def is_disappeared():
-        return False
-        
     # элемент должен исчезнуть (будет ждать до тех пор, пока элемент не исчезнет)
     def is_disappeared(self, how, what, timeout=4):
         try:
@@ -68,3 +73,8 @@ class BasePage():
         #self.browser.find_element(By.CSS_SELECTOR, "#login_link_invalid")
         #assert self.is_element_present(By.CSS_SELECTOR, "#registration_link"), "Login link is not presented"
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_basket_page(self):
+        basket_page = self.browser.find_element(*BasePageLocators.BASKET_BUTTON)
+        basket_page.click()
+        

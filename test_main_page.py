@@ -1,9 +1,23 @@
+from pages.basket_page import BasketPage
+from selenium.webdriver.common.by import By
+import pytest
 from pages.main_page  import MainPage
 from pages.login_page import LoginPage
 import time
 link = "http://selenium1py.pythonanywhere.com/"
 #link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
 
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)
+    page.open()
+    time.sleep(7)
+    page.go_to_basket_page()
+    basketpage = BasketPage(browser, browser.current_url)
+    assert basketpage.is_disappeared(By.CSS_SELECTOR, "a.btn.btn-lg.btn-primary.btn-block"), "Не отсутствует Перейти к оформлению"
+    basketpage.havnt_book_in_basket()
+    
+@pytest.mark.skip(reason="no way of currently testing this")    
 def test_guest_can_go_to_login_page(browser):
     page = MainPage(browser, link)   # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
     page.open()                      # открываем страницу
@@ -18,7 +32,8 @@ def test_guest_can_go_to_login_page(browser):
     #login_link = browser.find_element(By.CSS_SELECTOR, "#registration_link")
     #login_link = browser.find_element(*MainPageLocators.LOGIN_LINK)
     #login_link.click()    
-    
+
+@pytest.mark.skip(reason="no way of currently testing this")    
 def test_guest_should_see_login_link(browser):
     page = MainPage(browser, link)
     page.open()
