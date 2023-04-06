@@ -9,7 +9,7 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         addToCart = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_LINK)
         addToCart.click()
-        self.solve_quiz_and_get_code()
+        #self.solve_quiz_and_get_code()
         #self.prod_name_confirmed()
         #self.prod_price_confirmed()
         
