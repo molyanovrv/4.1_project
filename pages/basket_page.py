@@ -4,12 +4,9 @@ from selenium.webdriver.common.by import By
 
 class BasketPage(BasePage):
     def havnt_book_in_basket(self):
-        #result = self.is_element_present(By.CSS_SELECTOR, ".content>#content_inner>p")
-        #result = self.browser.find_element(By.CSS_SELECTOR, ".content>#content_inner>p").text
         text = "Your basket is empty. Continue shopping"
         result = self.is_element_with_text_present(By.CSS_SELECTOR, ".content>#content_inner>p",text)
-        #print(result + "\nhavnt_book_in_basket") 
-        assert result , f'Элемент не найден:{text}'
+        return result
     
     def have_empty_message(self):
         assert result, "элемент не найден"
