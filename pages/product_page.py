@@ -15,7 +15,6 @@ class ProductPage(BasePage):
         
     def prod_name_confirmed(self):
         prod_name = self.browser.find_element(By.CSS_SELECTOR, ".product_main>h1").text
-        #confirm_message = self.browser.find_element(By.CSS_SELECTOR, ".alert.alert-safe.alert-noicon.alert-success strong")
         confirm_message = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text
         print("prod_name_confirmed done")
         assert prod_name == confirm_message, "В подтверждении нет названия продукта"

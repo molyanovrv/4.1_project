@@ -29,3 +29,7 @@ class LoginPage(BasePage):
         self.browser.find_element(By.CSS_SELECTOR, "#id_registration-password2").send_keys(password)
         self.browser.find_element(By.XPATH, "//button[@name='registration_submit']").click()
         
+    def user_logined(self):
+        result = self.is_element_present(*LoginPageLocators.USER_ICON)
+        assert result, "элемент USER_ICON не найден, пользователь не залогинен"
+    
